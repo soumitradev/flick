@@ -146,6 +146,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   players: []
   Line: []
+  cam: {fileID: 1375661710}
 --- !u!1001 &220401105
 Prefab:
   m_ObjectHideFlags: 0
@@ -248,6 +249,11 @@ Prefab:
     - target: {fileID: 1773270036996664, guid: f00b11b095849e14eaab90f9e33a76d0, type: 2}
       propertyPath: m_Name
       value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 114633869171025602, guid: f00b11b095849e14eaab90f9e33a76d0,
+        type: 2}
+      propertyPath: force
+      value: 300
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f00b11b095849e14eaab90f9e33a76d0, type: 2}
@@ -643,6 +649,11 @@ Prefab:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114665494062843168, guid: 50dc061df6685a04aa3e01875d01865b,
+        type: 2}
+      propertyPath: force
+      value: 300
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 58061226309639784, guid: 50dc061df6685a04aa3e01875d01865b, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 50dc061df6685a04aa3e01875d01865b, type: 2}
@@ -736,6 +747,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   players: []
   AILine: []
+  cam: {fileID: 1375661710}
 --- !u!1 &1375661710
 GameObject:
   m_ObjectHideFlags: 0
@@ -803,7 +815,7 @@ Camera:
   far clip plane: 5000
   field of view: 3
   orthographic: 1
-  orthographic size: 3
+  orthographic size: 5
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -844,8 +856,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targets:
-  - {fileID: 544191944}
   - {fileID: 395723568}
+  - {fileID: 544191944}
   offset: {x: 0, y: 0, z: -15}
   smoothTime: 0.5
   minZoom: 20

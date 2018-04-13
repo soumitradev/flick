@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-/*  TODO: 
+ /*  TODO: 
  * - Create System For Multiple Dots
  * - Polish The Multi-Target Cam
  * - Add Ads
@@ -12,7 +12,6 @@ using UnityEngine;
  * - Rename Variables / Code
  * - Beautify All Code
  * - Add Comments To Code
- * - Greate A Git
  * - Change Input To Touch
  * - Check Display Compatibility
  * - Upload To Play Store
@@ -20,10 +19,7 @@ using UnityEngine;
  * *************************V2.0********************************
  * - Add Skins
  * - Add Local Multiplayer
- * ////////////////////////////Later, Maybe After Figuring Out In-App-Purchases
- * - Add Powerups
- * - Shop for powerups
-*/
+ */
 
 public class Shoot : MonoBehaviour
 {
@@ -46,9 +42,7 @@ public class Shoot : MonoBehaviour
 
 	public GameObject[] Line;
 
-	public bool secondChance = false;
-
-	public bool firstChance;
+	public int Chance = 0;
 
 	public GameObject original;
 
@@ -59,8 +53,6 @@ public class Shoot : MonoBehaviour
 		startPos = transform.position;
 
 		trail.time = Mathf.Infinity;
-
-		firstChance = true;
 	}
 	
 	// Update is called once per frame
@@ -86,12 +78,12 @@ public class Shoot : MonoBehaviour
 
 		turnDone = true;
 
-		firstChance = false;
-
 		trail.enabled = true;
 
+		Chance++;
+
 		FindObjectOfType<AudioManager>() .Play ("Click");
-		if (secondChance) {
+		if (Chance >= 2) {
 
 			original.tag = "otherLine";
 
@@ -110,10 +102,6 @@ public class Shoot : MonoBehaviour
 
 	void Update ()
 	{
-
-		if (!firstChance) {
-			secondChance = true;
-		}
 
 		if (spawn)
 			Instantiate (ball, transform.position, Quaternion.identity);
@@ -146,7 +134,7 @@ public class Shoot : MonoBehaviour
 		// Keep it in a certain radius
 		if (!turnDone) {
 
-			float radius = 1.8f;
+			float radius = 1.5f;
 
 			Vector3 dir = p - startPos;
 

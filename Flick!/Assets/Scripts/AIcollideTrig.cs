@@ -7,6 +7,8 @@ public class AIcollideTrig : MonoBehaviour {
 	public GameObject[] players;
 	public GameObject[] AILine;
 
+	public GameObject cam;
+
 
 	void OnTriggerEnter2D (Collider2D player){
 
@@ -22,6 +24,10 @@ public class AIcollideTrig : MonoBehaviour {
 				Destroy (AILine [j]);
 			}
 			FindObjectOfType<AudioManager>() .Play ("Win");
+
+			player.GetComponentInParent<Shoot> ().enabled = false;
+
+			cam.GetComponent<MultipleTargetCam> ().targets.RemoveAt(0);
 		}
 	}
 }

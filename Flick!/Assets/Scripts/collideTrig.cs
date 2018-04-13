@@ -6,11 +6,12 @@ public class collideTrig : MonoBehaviour {
 
 	public GameObject[] players;
 	public GameObject[] Line;
+	public GameObject cam;
 
 
-	void OnTriggerEnter2D (Collider2D player){
+	void OnTriggerEnter2D (Collider2D enemy){
 
-		if (player.tag != "Player") {
+		if (enemy.tag == "Enemy") {
 			players = GameObject.FindGameObjectsWithTag ("Player");
 			Line = GameObject.FindGameObjectsWithTag ("Line");
 
@@ -23,6 +24,10 @@ public class collideTrig : MonoBehaviour {
 			}
 
 			FindObjectOfType<AudioManager>() .Play ("Death");
+
+			enemy.GetComponentInParent<AIShoot> ().enabled = false;
+
+			cam.GetComponent<MultipleTargetCam> ().targets.RemoveAt(1);
 
 		}
 	}

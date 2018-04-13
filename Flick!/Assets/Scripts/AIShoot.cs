@@ -18,9 +18,7 @@ public class AIShoot : MonoBehaviour
 
 	public TrailRenderer trail;
 
-	public bool firstChance;
-
-	public bool secondChance = false;
+	public int Chance = 0;
 
 	public GameObject[] Line;
 
@@ -39,8 +37,6 @@ public class AIShoot : MonoBehaviour
 		startPos = transform.position;
 
 		trail.time = Mathf.Infinity;
-
-		firstChance = true;
 	
 	}
 
@@ -52,8 +48,6 @@ public class AIShoot : MonoBehaviour
 		stateStress = false;
 
 		AITurn = false;
-
-		firstChance = false;
 
 		trail.enabled = true;
 
@@ -71,7 +65,9 @@ public class AIShoot : MonoBehaviour
 
 		FindObjectOfType<AudioManager>() .Play ("Click");
 
-		if (secondChance) {
+		Chance++;
+
+		if (Chance >= 2) {
 
 			original.tag = "AIotherLine";
 
@@ -88,13 +84,8 @@ public class AIShoot : MonoBehaviour
 		}
 	}
 
-	void Update () {
-		
-		if (!firstChance) {
-			
-			secondChance = true;
-		
-		}
+	void FixedUpdate () {
+
 
 		if (spawn)
 			Instantiate (ball, transform.position, Quaternion.identity);
@@ -134,9 +125,9 @@ public class AIShoot : MonoBehaviour
 
 		if (AITurn) {
 			
-			float radius = 1.8f;
+			float radius = 1.5f;
 
-			p = new Vector3 (Random.Range (-2f, 2f), Random.Range (-2f, 2f));
+			p = new Vector3 ((radius * Random.Range (-1.11f, 1.11f)),(radius * Random.Range (-1.11f, 1.11f)));
 
 			Vector3 dir = p - startPos;
 	
