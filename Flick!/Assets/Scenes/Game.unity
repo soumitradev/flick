@@ -861,7 +861,7 @@ MonoBehaviour:
   offset: {x: 0, y: 0, z: -15}
   smoothTime: 0.5
   minZoom: 20
-  maxZoom: 2
+  maxZoom: 5
   zoomLim: 50
 --- !u!1001 &1795903111
 Prefab:
