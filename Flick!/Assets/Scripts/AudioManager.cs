@@ -5,6 +5,7 @@ using UnityEngine.Audio;
 public class AudioManager : MonoBehaviour {
 
 	public Sound[] sounds;
+	public AudioMixerGroup volume;
 
 	// Use this for initialization
 	void Awake () {
@@ -16,6 +17,8 @@ public class AudioManager : MonoBehaviour {
 			s.source.volume = s.volume;
 
 			s.source.loop = s.loop;
+
+			s.source.outputAudioMixerGroup = volume;
 		}
 	}
 
