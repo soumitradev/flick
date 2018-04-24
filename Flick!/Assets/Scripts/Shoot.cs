@@ -7,21 +7,13 @@ using UnityEngine;
  * - Polish The Multi-Target Cam
  * - Add Ads
  * - Add Tutorial
-<<<<<<< HEAD
  * - Check Display Compatibility
  * - Upload To Play Store
  * ------------Post-Up------------
  * - Add Comments To Code
-=======
- * - Create World Limits
->>>>>>> parent of ec5503b... Major Changes
  * - Clean Up Code
  * - Rename Variables / Code
  * - Beautify All Code
- * - Add Comments To Code
- * - Change Input To Touch
- * - Check Display Compatibility
- * - Upload To Play Store
  * - Marketing
  * *************************V2.0********************************
  * - Add Skins
