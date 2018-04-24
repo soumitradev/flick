@@ -3,18 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 
  /*  TODO: 
- * - Create System For Multiple Dots
+ * - Create World Limits
  * - Polish The Multi-Target Cam
  * - Add Ads
  * - Add Tutorial
- * - Create World Limits
+ * - Check Display Compatibility
+ * - Upload To Play Store
+ -------------POST-UPLOAD------------
  * - Clean Up Code
  * - Rename Variables / Code
  * - Beautify All Code
  * - Add Comments To Code
- * - Change Input To Touch
- * - Check Display Compatibility
- * - Upload To Play Store
  * - Marketing
  * *************************V2.0********************************
  * - Add Skins
