@@ -3,17 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 
  /*  TODO: 
- * - Create World Limits
- * - Polish The Multi-Target Cam
  * - Add Ads
  * - Add Tutorial
  * - Check Display Compatibility
  * - Upload To Play Store
- -------------POST-UPLOAD------------
+ * ------------Post-Up------------
+ * - Add Comments To Code
  * - Clean Up Code
  * - Rename Variables / Code
  * - Beautify All Code
- * - Add Comments To Code
  * - Marketing
  * *************************V2.0********************************
  * - Add Skins
@@ -133,7 +131,7 @@ public class Shoot : MonoBehaviour
 		// Keep it in a certain radius
 		if (!turnDone) {
 
-			float radius = 1.5f;
+			float radius = 1.8f;
 
 			Vector3 dir = p - startPos;
 
