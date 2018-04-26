@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
  /*  TODO: 
- * - Add Ads
+ * - Add Ads - 40:02 On Bookmark
  * - Add Tutorial
  * - Check Display Compatibility
  * - Upload To Play Store
