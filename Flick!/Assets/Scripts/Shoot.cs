@@ -5,6 +5,9 @@ using UnityEngine;
  /*  TODO: 
  * - Add Ads - 40:02 On Bookmark
  * - Add Tutorial
+ * - Coins
+ * - Analytics
+ * - Pause
  * - Check Display Compatibility
  * - Upload To Play Store
  * ------------Post-Up------------

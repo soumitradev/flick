@@ -15,4 +15,7 @@ public class AdLoader : MonoBehaviour {
 	public void Play_Ad () {
 		Advertisement.Show ();
 	}
+	public void Play_Rewarded_Ad () {
+		Advertisement.Show (rewardedVideo);
+	}
 }

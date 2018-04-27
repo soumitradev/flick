@@ -8,7 +8,7 @@ public class AdManager : MonoBehaviour {
 	public bool Testing = true;
 
 	void Start () {
-		Advertisement.Initialize ("1782072", Testing);
+		Advertisement.Initialize ("1715289", Testing);
 	}
 
 }
