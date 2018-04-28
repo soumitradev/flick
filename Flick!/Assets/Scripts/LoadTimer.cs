@@ -22,29 +22,15 @@ public class LoadTimer : MonoBehaviour {
 
 	void LoadMenu (){
 
-//#if UNITY_EDITOR 
-//	StartCoroutine(WaitForAd());
-//#endif
-
-		if (Advertisement.IsReady()){
-			Advertisement.Show ();
+		if (Advertisement.IsReady("video")){
+			Advertisement.Show ("video");
 		}
 
 		SceneManager.LoadScene("Menu");
 
 	}
 
-	/*IEnumerator WaitForAd()
-	{
-		float currentTimeScale = Time.timeScale;
-		Time.timeScale = 0f;
 
-		while (Advertisement.isShowing)
-			yield return null;
-
-		Time.timeScale = currentTimeScale;
-	}
-		*/
 	// Update is called once per frame
 	void Update ()
 	{

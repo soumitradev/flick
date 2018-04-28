@@ -3,11 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
  /*  TODO: 
- * - Add Ads - 40:02 On Bookmark
- * - Add Tutorial
- * - Coins
- * - Analytics
- * - Pause
  * - Check Display Compatibility
  * - Upload To Play Store
  * ------------Post-Up------------
@@ -16,6 +11,8 @@ using UnityEngine;
  * - Rename Variables / Code
  * - Beautify All Code
  * - Marketing
+ * -----------------Next Version-----------
+ * - Pause
  * *************************V2.0********************************
  * - Add Skins
  * - Add Local Multiplayer
