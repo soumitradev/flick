@@ -29,6 +29,8 @@ public class Shoot : MonoBehaviour
 
 	public bool turnDone = false;
 
+	public bool printed1 = false;
+
 	public TrailRenderer trail;
 
 	public GameObject ball;
@@ -80,25 +82,28 @@ public class Shoot : MonoBehaviour
 		Chance++;
 
 		FindObjectOfType<AudioManager>() .Play ("Click");
-		if (Chance >= 2) {
+
+	}
+
+	void Update ()
+	{
+		if (Chance >= 2 && !printed1) {
 
 			original.tag = "otherLine";
+
+			printed1 = true;
 
 			Line = GameObject.FindGameObjectsWithTag ("Line");
 
 			for (var i = 0; i < Line.Length; i++) {
-				
+
 				Destroy (Line [i]);
-			
+
 			}
 
 			original.tag = "Line";
 
 		}
-	}
-
-	void Update ()
-	{
 
 		if (spawn)
 			Instantiate (ball, transform.position, Quaternion.identity);

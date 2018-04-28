@@ -474,6 +474,11 @@ Prefab:
       propertyPath: m_Parameters.widthMultiplier
       value: 0.4
       objectReference: {fileID: 0}
+    - target: {fileID: 114633869171025602, guid: f00b11b095849e14eaab90f9e33a76d0,
+        type: 2}
+      propertyPath: Chance
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f00b11b095849e14eaab90f9e33a76d0, type: 2}
   m_IsPrefabParent: 0
@@ -596,7 +601,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a7af6dd7ee879e48ad9fb5b5ffefd5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Testing: 1
+  Testing: 0
 --- !u!4 &269145108
 Transform:
   m_ObjectHideFlags: 0
@@ -1089,7 +1094,7 @@ Prefab:
     - target: {fileID: 114665494062843168, guid: 50dc061df6685a04aa3e01875d01865b,
         type: 2}
       propertyPath: force
-      value: 225
+      value: 450
       objectReference: {fileID: 0}
     - target: {fileID: 114782848747184398, guid: 50dc061df6685a04aa3e01875d01865b,
         type: 2}
