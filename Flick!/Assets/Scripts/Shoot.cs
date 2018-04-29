@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
- /*  TODO: 
+/*  TODO: 
  * - Check Display Compatibility
  * - Upload To Play Store
  * ------------Post-Up------------
@@ -29,8 +29,6 @@ public class Shoot : MonoBehaviour
 
 	public bool turnDone = false;
 
-	public bool printed1 = false;
-
 	public TrailRenderer trail;
 
 	public GameObject ball;
@@ -47,13 +45,24 @@ public class Shoot : MonoBehaviour
 
 	// Use this for initialization
 
+
 	void Start ()
 	{
+		//GetComponent<Rigidbody2D> ().bodyType = RigidbodyType2D.Kinematic;
+
 		startPos = transform.position;
+
+		Invoke ("AllowPhysics", 1f);
 
 		trail.time = Mathf.Infinity;
 	}
-	
+
+	void AllowPhysics(){
+
+		GetComponent<Rigidbody2D> ().bodyType = RigidbodyType2D.Kinematic;
+
+	}
+
 	// Update is called once per frame
 	void OnMouseUp ()
 	{
@@ -62,6 +71,8 @@ public class Shoot : MonoBehaviour
 		// Disable isKinematic
 
 		GetComponent<Rigidbody2D> ().isKinematic = false;
+
+		GetComponent<Rigidbody2D> ().bodyType = RigidbodyType2D.Dynamic;
 
 		// Add the Force
 
@@ -82,16 +93,9 @@ public class Shoot : MonoBehaviour
 		Chance++;
 
 		FindObjectOfType<AudioManager>() .Play ("Click");
-
-	}
-
-	void Update ()
-	{
-		if (Chance >= 2 && !printed1) {
+		if (Chance >= 2) {
 
 			original.tag = "otherLine";
-
-			printed1 = true;
 
 			Line = GameObject.FindGameObjectsWithTag ("Line");
 
@@ -104,6 +108,12 @@ public class Shoot : MonoBehaviour
 			original.tag = "Line";
 
 		}
+	}
+
+	void Update ()
+	{
+		if (!stateStress && GetComponent<Speed> ().speed == 0 && Chance>0)
+			GetComponent<Rigidbody2D> ().isKinematic = true;
 
 		if (spawn)
 			Instantiate (ball, transform.position, Quaternion.identity);
@@ -116,12 +126,12 @@ public class Shoot : MonoBehaviour
 
 			Instantiate (ball, startPos, Quaternion.identity);
 
-			printed = true;
+
 
 			spawn = false;
 
-			GetComponent<Rigidbody2D> ().isKinematic = true;
 
+			printed = true;
 		}			
 	}
 
@@ -130,6 +140,8 @@ public class Shoot : MonoBehaviour
 		// Convert mouse position to world position
 
 		GetComponent<CircleCollider2D> ().enabled = false;
+
+		GetComponent<Rigidbody2D> ().bodyType = RigidbodyType2D.Kinematic;
 
 		Vector3 p = Camera.main.ScreenToWorldPoint (Input.mousePosition);
 
@@ -142,9 +154,9 @@ public class Shoot : MonoBehaviour
 
 
 			if (dir.sqrMagnitude > radius) {
-				
+
 				dir = dir.normalized * radius;
-			
+
 			}
 
 			// Set the Position

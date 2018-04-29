@@ -84,7 +84,7 @@ public class AIShoot : MonoBehaviour
 		}
 	}
 
-	void FixedUpdate () {
+	void Update () {
 
 
 		if (spawn)
@@ -96,7 +96,9 @@ public class AIShoot : MonoBehaviour
 			
 			Turn ();
 
+
 			Opponent.GetComponent<Shoot> ().turnDone = false;
+
 
 		}
 
@@ -114,6 +116,7 @@ public class AIShoot : MonoBehaviour
 
 			GetComponent<Rigidbody2D> ().isKinematic = true;
 
+
 		}
 	
 	}
@@ -121,13 +124,16 @@ public class AIShoot : MonoBehaviour
 
 	void Turn(){
 
+
+		Opponent.GetComponent<Rigidbody2D> ().bodyType = RigidbodyType2D.Dynamic;
+
 		GetComponent<CircleCollider2D> ().enabled = false;
 
 		if (AITurn) {
 			
-			float radius = 1.5f;
+			float radius = 1.8f;
 
-			p = new Vector3 ((radius * Random.Range (-1.11f, 1.11f)),(radius * Random.Range (-1.11f, 1.11f)));
+			p = Random.insideUnitCircle.normalized*radius;
 
 			Vector3 dir = p - startPos;
 	
