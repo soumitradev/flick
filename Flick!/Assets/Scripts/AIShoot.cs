@@ -36,8 +36,16 @@ public class AIShoot : MonoBehaviour
 	
 		startPos = transform.position;
 
+		Invoke ("AllowPhysics", .1f);
+
 		trail.time = Mathf.Infinity;
 	
+	}
+
+	void AllowPhysics(){
+
+		GetComponent<Rigidbody2D> ().bodyType = RigidbodyType2D.Kinematic;
+
 	}
 
 	void Release(){
@@ -84,15 +92,19 @@ public class AIShoot : MonoBehaviour
 		}
 	}
 
-	void Update () {
-
+	void LateUpdate(){
 
 		if (spawn)
 			Instantiate (ball, transform.position, Quaternion.identity);
 
+	}
+
+	void Update () {
+
+
 		AITurn = Opponent.GetComponent<Shoot> ().turnDone;
 	
-		if (Opponent.GetComponent<Speed>().speed == 0 && AITurn) {
+		if (AITurn) {
 			
 			Turn ();
 
@@ -125,7 +137,7 @@ public class AIShoot : MonoBehaviour
 	void Turn(){
 
 
-		Opponent.GetComponent<Rigidbody2D> ().bodyType = RigidbodyType2D.Dynamic;
+		//Opponent.GetComponent<Rigidbody2D> ().bodyType = RigidbodyType2D.Kinematic;
 
 		GetComponent<CircleCollider2D> ().enabled = false;
 

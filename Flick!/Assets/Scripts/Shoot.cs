@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /*  TODO: 
- * - Check Display Compatibility
- * - Upload To Play Store
  * ------------Post-Up------------
+ * 
+ * https://play.google.com/store/apps/details?id=com.BlubirdLabs.Flick
+ * 
  * - Add Comments To Code
- * - Clean Up Code
+ * - Clean Up Code & Centralize
  * - Rename Variables / Code
  * - Beautify All Code
  * - Marketing
@@ -48,11 +49,10 @@ public class Shoot : MonoBehaviour
 
 	void Start ()
 	{
-		//GetComponent<Rigidbody2D> ().bodyType = RigidbodyType2D.Kinematic;
 
 		startPos = transform.position;
 
-		Invoke ("AllowPhysics", 1f);
+		Invoke ("AllowPhysics", .1f);
 
 		trail.time = Mathf.Infinity;
 	}
@@ -66,11 +66,15 @@ public class Shoot : MonoBehaviour
 	// Update is called once per frame
 	void OnMouseUp ()
 	{
+		spawn = true;
+
+		stateStress = false;
+
+		turnDone = true;
+
+		trail.enabled = true;
+
 		GetComponent<CircleCollider2D> ().enabled = true;
-
-		// Disable isKinematic
-
-		GetComponent<Rigidbody2D> ().isKinematic = false;
 
 		GetComponent<Rigidbody2D> ().bodyType = RigidbodyType2D.Dynamic;
 
@@ -80,19 +84,12 @@ public class Shoot : MonoBehaviour
 
 		transform.position = startPos;
 
-		spawn = true;
-
 		GetComponent<Rigidbody2D> ().AddForce (dir * force);
 
-		stateStress = false;
-
-		turnDone = true;
-
-		trail.enabled = true;
+		FindObjectOfType<AudioManager>() .Play ("Click");
 
 		Chance++;
 
-		FindObjectOfType<AudioManager>() .Play ("Click");
 		if (Chance >= 2) {
 
 			original.tag = "otherLine";
@@ -110,13 +107,17 @@ public class Shoot : MonoBehaviour
 		}
 	}
 
-	void Update ()
-	{
-		if (!stateStress && GetComponent<Speed> ().speed == 0 && Chance>0)
-			GetComponent<Rigidbody2D> ().isKinematic = true;
+	void LateUpdate(){
 
 		if (spawn)
 			Instantiate (ball, transform.position, Quaternion.identity);
+
+	}
+
+	void Update ()
+	{
+
+
 
 		if (!stateStress && GetComponent<Speed> ().speed == 0 && !printed) {
 
@@ -126,12 +127,12 @@ public class Shoot : MonoBehaviour
 
 			Instantiate (ball, startPos, Quaternion.identity);
 
-
+			printed = true;
 
 			spawn = false;
 
+			GetComponent<Rigidbody2D> ().isKinematic = true;
 
-			printed = true;
 		}			
 	}
 
@@ -140,8 +141,6 @@ public class Shoot : MonoBehaviour
 		// Convert mouse position to world position
 
 		GetComponent<CircleCollider2D> ().enabled = false;
-
-		GetComponent<Rigidbody2D> ().bodyType = RigidbodyType2D.Kinematic;
 
 		Vector3 p = Camera.main.ScreenToWorldPoint (Input.mousePosition);
 
