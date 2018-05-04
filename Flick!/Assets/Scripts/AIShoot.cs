@@ -92,7 +92,7 @@ public class AIShoot : MonoBehaviour
 		}
 	}
 
-	void LateUpdate(){
+	void FixedUpdate(){
 
 		if (spawn)
 			Instantiate (ball, transform.position, Quaternion.identity);

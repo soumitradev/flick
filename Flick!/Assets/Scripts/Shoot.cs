@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-/*  TODO: 
+/*  TODO:
  * ------------Post-Up------------
- * 
+ *
  * https://play.google.com/store/apps/details?id=com.BlubirdLabs.Flick
- * 
+ *
  * - Add Comments To Code
  * - Clean Up Code & Centralize
  * - Rename Variables / Code
@@ -22,34 +22,35 @@ using UnityEngine;
 public class Shoot : MonoBehaviour
 {
 
-	public Vector3 startPos;
 
-	public float force;
+	public int Chance = 0;
 
 	public bool stateStress = false;
 
 	public bool turnDone = false;
 
-	public TrailRenderer trail;
-
-	public GameObject ball;
-
 	public bool printed = false;
 
 	public bool spawn;
 
-	public GameObject[] Line;
+	public float force;
 
-	public int Chance = 0;
+	public float deltaX, deltaY;
+
+	public Vector3 startPos;
+
+	public GameObject ball;
 
 	public GameObject original;
 
-	// Use this for initialization
+	public GameObject[] Line;
 
+	public TrailRenderer trail;
+
+	// Use this for initialization
 
 	void Start ()
 	{
-
 		startPos = transform.position;
 
 		Invoke ("AllowPhysics", .1f);
@@ -58,10 +59,8 @@ public class Shoot : MonoBehaviour
 	}
 
 	void AllowPhysics(){
-
 		GetComponent<Rigidbody2D> ().bodyType = RigidbodyType2D.Kinematic;
-
-	}
+		}
 
 	// Update is called once per frame
 	void OnMouseUp ()
@@ -107,7 +106,7 @@ public class Shoot : MonoBehaviour
 		}
 	}
 
-	void LateUpdate(){
+	void FixedUpdate(){
 
 		if (spawn)
 			Instantiate (ball, transform.position, Quaternion.identity);
@@ -117,24 +116,23 @@ public class Shoot : MonoBehaviour
 	void Update ()
 	{
 
+			if (!stateStress && GetComponent<Speed> ().speed == 0 && !printed) {
 
+				startPos = transform.position;
 
-		if (!stateStress && GetComponent<Speed> ().speed == 0 && !printed) {
+				stateStress = false;
 
-			startPos = transform.position;
+				Instantiate (ball, startPos, Quaternion.identity);
 
-			stateStress = false;
+				printed = true;
 
-			Instantiate (ball, startPos, Quaternion.identity);
+				spawn = false;
 
-			printed = true;
+				GetComponent<Rigidbody2D> ().isKinematic = true;
 
-			spawn = false;
+			}
+		}
 
-			GetComponent<Rigidbody2D> ().isKinematic = true;
-
-		}			
-	}
 
 	void OnMouseDrag ()
 	{
@@ -150,7 +148,6 @@ public class Shoot : MonoBehaviour
 			float radius = 1.8f;
 
 			Vector3 dir = p - startPos;
-
 
 			if (dir.sqrMagnitude > radius) {
 
