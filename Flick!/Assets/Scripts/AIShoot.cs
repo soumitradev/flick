@@ -134,37 +134,36 @@ public class AIShoot : MonoBehaviour
 	}
 
 
-	void Turn(){
+	void Turn ()
+	{
+			//Opponent.GetComponent<Rigidbody2D> ().bodyType = RigidbodyType2D.Kinematic;
 
+			GetComponent<CircleCollider2D> ().enabled = false;
 
-		//Opponent.GetComponent<Rigidbody2D> ().bodyType = RigidbodyType2D.Kinematic;
-
-		GetComponent<CircleCollider2D> ().enabled = false;
-
-		if (AITurn) {
+			if (AITurn) {
 			
-			float radius = 1.8f;
+				float radius = 1.8f;
 
-			p = Random.insideUnitCircle.normalized*radius;
+				p = Random.insideUnitCircle.normalized * radius;
 
-			Vector3 dir = p - startPos;
+				Vector3 dir = p - startPos;
 	
-			if (dir.sqrMagnitude > radius)
-				dir = dir.normalized * radius;
+				if (dir.sqrMagnitude > radius)
+					dir = dir.normalized * radius;
 
 
-			// Set the Position
+				// Set the Position
 
-			transform.position = startPos + dir;
+				transform.position = startPos + dir;
 
-			stateStress = true; 
+				stateStress = true; 
 
-			trail.enabled = false;
+				trail.enabled = false;
 
-			printed = false;
+				printed = false;
 
-			Invoke ("Release", 1f);
+				Invoke ("Release", 1f);
 
+			}
 		}
 	}
-}
