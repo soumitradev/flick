@@ -1,6 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.EventSystems;
 
 /*  TODO:
  * ------------Post-Up------------
@@ -19,264 +18,169 @@ using UnityEngine;
  * - Add Local Multiplayer
  */
 
-public class Shoot : MonoBehaviour
+public class Shoot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
+    public int Chance = 0;
 
+    public bool stateStress = false;
 
-	public int Chance = 0;
+    public bool turnDone = false;
 
-	public bool stateStress = false;
+    public bool printed = false;
 
-	public bool turnDone = false;
+    public bool spawn;
 
-	public bool printed = false;
+    public bool setPos;
 
-	public bool spawn;
+    public float force;
 
+    public float deltaX, deltaY;
 
-	public float force;
+    public Vector3 startPos;
 
-	public float deltaX, deltaY;
+    public GameObject ball;
 
-	public Vector3 startPos;
+    public GameObject original;
 
-	public Vector3 refPos;
+    public GameObject[] Line;
 
-	public GameObject ball;
+    public TrailRenderer trail;
 
-	public GameObject original;
+    // Use this for initialization
 
-	public GameObject[] Line;
+    private void Start()
+    {
+        setPos = true;
 
-	public TrailRenderer trail;
+        startPos = transform.position;
 
-	// Use this for initialization
+        Invoke("AllowPhysics", .1f);
 
-	void Start ()
-	{
-		startPos = transform.position;
+        trail.time = Mathf.Infinity;
+    }
 
-		Invoke ("AllowPhysics", .1f);
+    private void AllowPhysics()
+    {
+        GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
+    }
 
-		trail.time = Mathf.Infinity;
-	}
+    // Update is called once per frame
+    public void OnEndDrag(PointerEventData eventData)
+    {
 
-	void AllowPhysics(){
-		GetComponent<Rigidbody2D> ().bodyType = RigidbodyType2D.Kinematic;
-		}
+        spawn = true;
+        
+        turnDone = true;
 
-	// Update is called once per frame
-	void OnMouseUp ()
-	{
-		spawn = true;
+        GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
 
-		stateStress = false;
+        GetComponent<Rigidbody2D>().isKinematic = false;
 
-		turnDone = true;
 
-		trail.enabled = true;
 
-		GetComponent<CircleCollider2D> ().enabled = true;
+        GetComponent<CircleCollider2D>().enabled = true;
 
-		GetComponent<Rigidbody2D> ().bodyType = RigidbodyType2D.Dynamic;
 
-		// Add the Force
 
-		Vector3 dir = startPos - (Vector3)transform.position;
+        stateStress = false;
 
-		transform.position = startPos;
 
-		GetComponent<Rigidbody2D> ().AddForce (dir * force);
+        trail.enabled = true;
 
-		FindObjectOfType<AudioManager>() .Play ("Click");
 
-		Chance++;
+        // Add the Force
 
-		if (Chance >= 2) {
+        Vector3 dir = startPos - transform.position;
 
-			original.tag = "otherLine";
+        transform.position = startPos;
 
-			Line = GameObject.FindGameObjectsWithTag ("Line");
+        GetComponent<Rigidbody2D>().AddForce(dir * force);
 
-			for (var i = 0; i < Line.Length; i++) {
+        FindObjectOfType<AudioManager>().Play("Click");
 
-				Destroy (Line [i]);
+        Chance++;
 
-			}
+        if (Chance >= 2)
+        {
+            original.tag = "otherLine";
 
-			original.tag = "Line";
+            Line = GameObject.FindGameObjectsWithTag("Line");
 
-		}
-	}
+            for (var i = 0; i < Line.Length; i++)
+            {
+                Destroy(Line[i]);
+            }
 
-	void FixedUpdate(){
+            original.tag = "Line";
+        }
+    }
 
-		if (spawn)
-			Instantiate (ball, transform.position, Quaternion.identity);
+    private void FixedUpdate()
+    {
+        if (spawn)
+            Instantiate(ball, transform.position, Quaternion.identity);
+    }
 
-	}
+    private void Update()
+    {
 
-	void Update ()
-	{
+        if (!stateStress && GetComponent<Speed>().speed <= 0.01f && !printed && setPos)
+        {
+            startPos = transform.position;
 
-		if (Input.touchCount > 0) {
-		
-			Touch touch = Input.GetTouch (0);
+            stateStress = false;
 
-			switch (touch.phase) {
+            Instantiate(ball, startPos, Quaternion.identity);
 
-			case TouchPhase.Began:
-				Turn (touch);
-				break;
-			case TouchPhase.Moved:
-				Turn(touch);
-				break;
+            printed = true;
 
-			case TouchPhase.Ended:
+            spawn = false;
 
-				Release ();
 
-				break;
-		}
+        }
+    }
 
-		if (!stateStress && GetComponent<Speed> ().speed <= 0.01f && !printed) {
+    public void OnDrag(PointerEventData eventData)
+    {
+        GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
 
-			startPos = transform.position;
+        GetComponent<Rigidbody2D>().isKinematic = false;
 
-			stateStress = false;
+        // Convert mouse position to world position
 
-			Instantiate (ball, startPos, Quaternion.identity);
+        Vector3 p = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
-			printed = true;
+        // Keep it in a certain radius
+        if (!turnDone)
+        {
+            float radius = 1.8f;
 
-			spawn = false;
+            Vector3 dir = p - startPos;
 
-			GetComponent<Rigidbody2D> ().isKinematic = true;
+            if (dir.sqrMagnitude > radius)
+            {
+                dir = dir.normalized * radius;
+            }
 
-			Invoke ("AllowPhysics", .1f);
+            // Set the Position
 
-		}
-		}
-	}
+            transform.position = startPos + dir;
 
+            stateStress = true;
 
+            trail.enabled = false;
 
-	void Release(){
+            printed = false;
+        }
+    }
 
-			turnDone = true;
+    public void OnBeginDrag(PointerEventData eventData)
+    {
+        setPos = false;
 
-			spawn = true;
+        GetComponent<CircleCollider2D>().enabled = false;
+        GetComponent<Rigidbody2D>().isKinematic = true;
 
-			stateStress = false;
-
-
-			trail.enabled = true;
-
-			GetComponent<CircleCollider2D> ().enabled = true;
-
-			GetComponent<Rigidbody2D> ().isKinematic = false;
-
-			// Add the Force
-
-			Vector3 dir = startPos - (Vector3)transform.position;
-
-			transform.position = startPos;
-
-			GetComponent<Rigidbody2D> ().AddForce (dir * force);
-
-
-
-			FindObjectOfType<AudioManager> ().Play ("Click");
-
-			Chance++;
-
-			if (Chance >= 2) {
-
-				original.tag = "otherLine";
-
-				Line = GameObject.FindGameObjectsWithTag ("Line");
-
-				for (var i = 0; i < Line.Length; i++) {
-
-					Destroy (Line [i]);
-
-				}
-
-				original.tag = "Line";
-
-			}
-	
-		}
-
-
-	void Turn(Touch touch){
-		if (GetComponent<CircleCollider2D> ().OverlapPoint (touch.position)) {
-
-			GetComponent<CircleCollider2D> ().enabled = false;
-
-			Vector3 p = Camera.main.ScreenToWorldPoint (touch.position);
-
-			if (!turnDone && GetComponent<Speed> ().speed <= 0.01f) {
-
-
-				// Keep it in a certain radius
-
-
-				float radius = 1.8f;
-
-				Vector3 dir = p - startPos;
-
-				if (dir.sqrMagnitude > radius) {
-
-					dir = dir.normalized * radius;
-
-				}
-
-				// Set the Position
-
-				transform.position = startPos + dir;
-
-				stateStress = true;
-
-				trail.enabled = false;
-
-				printed = false;
-			}
-
-		}
-	}
-
-	void OnMouseDrag ()
-	{
-		// Convert mouse position to world position
-
-		GetComponent<CircleCollider2D> ().enabled = false;
-
-		Vector3 p = Camera.main.ScreenToWorldPoint (Input.mousePosition);
-
-		// Keep it in a certain radius
-		if (!turnDone) {
-
-			float radius = 1.8f;
-
-			Vector3 dir = p - startPos;
-
-			if (dir.sqrMagnitude > radius) {
-
-				dir = dir.normalized * radius;
-
-			}
-
-			// Set the Position
-
-			transform.position = startPos + dir;
-
-			stateStress = true;
-
-			trail.enabled = false;
-
-			printed = false;
-
-		}
-	}
+        Invoke("AllowPhysics", .1f);
+    }
 }
