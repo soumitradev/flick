@@ -48,53 +48,39 @@ public class Shoot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHan
 
     private void Start()
     {
-       // spawn = false;
+        // spawn = false;
 
         startPos = transform.position;
 
         Invoke("AllowPhysics", .1f);
         //GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
 
-
-
         trail.time = Mathf.Infinity;
     }
 
     private void AllowPhysics()
     {
-        GetComponent<Rigidbody2D>().isKinematic = true;
+        GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
     }
-
 
     // Update is called once per frame
     public void OnEndDrag(PointerEventData pointerEvent)
     {
-
         //spawn = true;
-
 
         turnDone = true;
 
-        GetComponent<Rigidbody2D>().isKinematic = false;
-
-       // GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
-
- 
-
-
+        // GetComponent<Rigidbody2D>().isKinematic = false;
 
         GetComponent<CircleCollider2D>().enabled = true;
 
-
-
-
         stateStress = false;
-
 
         trail.enabled = true;
 
-
         // Add the Force
+
+        GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
 
         Vector3 dir = startPos - transform.position;
 
@@ -121,51 +107,40 @@ public class Shoot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHan
         }
     }
 
-    void FixedUpdate() {
-       
-            if (GetComponent<Speed>().speed > 0 && !stateStress )
-                Instantiate(ball, transform.position, Quaternion.identity);
-        
+    private void FixedUpdate()
+    {
+        if (GetComponent<Speed>().speed > 0 && !stateStress)
+            Instantiate(ball, transform.position, Quaternion.identity);
     }
 
-    void Update()
+    private void Update()
     {
-
-        if (Chance > 0 && !stateStress && GetComponent<Speed>().speed == 0f && !printed)
-            GetComponent<Rigidbody2D>().isKinematic = true;
-
         if (!stateStress)
-        startPos = transform.position;
+            startPos = transform.position;
 
         if (!stateStress && GetComponent<Speed>().speed == 0f && !printed)
         {
-
             stateStress = false;
-
 
             Instantiate(ball, startPos, Quaternion.identity);
 
             printed = true;
 
-           // spawn = false;
+            // spawn = false;
 
-
-
-
+            GetComponent<Rigidbody2D>().isKinematic = true;
         }
     }
 
     public void OnDrag(PointerEventData eventData)
     {
-
         GetComponent<CircleCollider2D>().enabled = false;
 
+        // Invoke("AllowPhysics", .1f);
 
-       // Invoke("AllowPhysics", .1f);
+        // GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
 
-       // GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
-
-        GetComponent<Rigidbody2D>().isKinematic = false;
+        //  GetComponent<Rigidbody2D>().isKinematic = false;
 
         // Convert mouse position to world position
 
@@ -188,7 +163,6 @@ public class Shoot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHan
             transform.position = startPos + dir;
 
             stateStress = true;
-           
 
             trail.enabled = false;
 
@@ -198,6 +172,5 @@ public class Shoot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHan
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-
     }
 }
