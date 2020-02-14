@@ -1018,7 +1018,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4598965325755450, guid: 50dc061df6685a04aa3e01875d01865b, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -15
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4598965325755450, guid: 50dc061df6685a04aa3e01875d01865b, type: 3}
       propertyPath: m_LocalRotation.x
@@ -1076,11 +1076,26 @@ PrefabInstance:
     - target: {fileID: 50757105081775324, guid: 50dc061df6685a04aa3e01875d01865b,
         type: 3}
       propertyPath: m_LinearDrag
-      value: 5
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 50757105081775324, guid: 50dc061df6685a04aa3e01875d01865b,
         type: 3}
       propertyPath: m_UseFullKinematicContacts
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 50757105081775324, guid: 50dc061df6685a04aa3e01875d01865b,
+        type: 3}
+      propertyPath: m_GravityScale
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 50757105081775324, guid: 50dc061df6685a04aa3e01875d01865b,
+        type: 3}
+      propertyPath: m_SleepingMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 50757105081775324, guid: 50dc061df6685a04aa3e01875d01865b,
+        type: 3}
+      propertyPath: m_Interpolate
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 114665494062843168, guid: 50dc061df6685a04aa3e01875d01865b,
@@ -1475,7 +1490,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1205180761}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -1.5, z: 0}
+  m_LocalPosition: {x: 0, y: -1.5, z: 5}
   m_LocalScale: {x: 0.15, y: 0.15, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1731,7 +1746,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1327025860}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.5, z: 0}
+  m_LocalPosition: {x: 0, y: 1.5, z: 5}
   m_LocalScale: {x: 0.15, y: 0.15, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -2035,7 +2050,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4362044559108536, guid: a20ea07209264064e9b61057cf379102, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4362044559108536, guid: a20ea07209264064e9b61057cf379102, type: 3}
       propertyPath: m_LocalRotation.x
