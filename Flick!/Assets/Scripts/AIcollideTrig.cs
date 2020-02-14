@@ -8,7 +8,7 @@ public class AIcollideTrig : MonoBehaviour {
 
 	public GameObject[] players;
 	public GameObject[] AILine;
-
+	public GameObject[] Line;
 	public GameObject cam;
 	public GameObject text;
 	public AudioMixer audioMixer;
@@ -39,16 +39,20 @@ public class AIcollideTrig : MonoBehaviour {
 
 			players = GameObject.FindGameObjectsWithTag ("Enemy");
 			AILine = GameObject.FindGameObjectsWithTag ("AILine");
+			Line = GameObject.FindGameObjectsWithTag("Line");
 
 			for (var i = 0; i < players.Length; i++) {
-				Destroy (players [i]);
+        		players[i].GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
+				Destroy(players [i]);
 			}
 
 			for (var j = 0; j < AILine.Length; j++) {
-				Destroy (AILine [j]);
+				Destroy(AILine [j]);
 			}
 
-
+			for (var k = 0; k < Line.Length; k++) {
+				Destroy(Line [k]);
+			}
 
 		}
 	}

@@ -36,20 +36,33 @@ public class AIShoot : MonoBehaviour
 	
 		startPos = transform.position;
 
-		Invoke ("AllowPhysics", .1f);
+        Invoke("MakeStatic", 0.1f);
+        Invoke("MakeDynamic", 0.1f);
 
 		trail.time = Mathf.Infinity;
 	
 	}
 
-	void AllowPhysics(){
+	private void MakeStatic()
+    {
+        GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
+    }
 
-		GetComponent<Rigidbody2D> ().bodyType = RigidbodyType2D.Kinematic;
+    private void MakeDynamic()
+    {
+        GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
+    }
 
-	}
+    private void MakeKinematic()
+    {
+        GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
+    }
+
 
 	void Release(){
-
+	
+        Invoke("MakeKinematic", 0.1f);
+        Invoke("MakeDynamic", 0.1f);
 
 		spawn = true;
 
@@ -60,8 +73,6 @@ public class AIShoot : MonoBehaviour
 		trail.enabled = true;
 
 		GetComponent<CircleCollider2D> ().enabled = true;
-
-		GetComponent<Rigidbody2D> ().bodyType = RigidbodyType2D.Dynamic;
 
 		// Add the Force
 
@@ -93,15 +104,7 @@ public class AIShoot : MonoBehaviour
 	}
 
 	void FixedUpdate(){
-
-		if (spawn)
-			Instantiate (ball, transform.position, Quaternion.identity);
-
-	}
-
-	void Update () {
-
-
+		
 		AITurn = Opponent.GetComponent<Shoot> ().turnDone;
 	
 		if (AITurn) {
@@ -114,7 +117,7 @@ public class AIShoot : MonoBehaviour
 
 		}
 
-		if (!stateStress && GetComponent<Speed> ().speed == 0 && !printed) {
+		if (!stateStress && GetComponent<Speed>().speed < 0.01f && !printed) {
 
 			startPos = transform.position;
 
@@ -125,45 +128,49 @@ public class AIShoot : MonoBehaviour
 			printed = true;
 
 			spawn = false;
-
-			GetComponent<Rigidbody2D> ().isKinematic = true;
-
-
 		}
-	
+
+		if (!stateStress && GetComponent<Speed>().speed < 0.01f)
+        {
+            MakeStatic();
+            MakeDynamic();
+        }
+
+		if (spawn)
+			Instantiate (ball, transform.position, Quaternion.identity);
+
+	}
+
+	void Update () {	
 	}
 
 
-	void Turn ()
-	{
-			//Opponent.GetComponent<Rigidbody2D> ().bodyType = RigidbodyType2D.Kinematic;
-
+	void Turn () {
+		if (AITurn) {
 			GetComponent<CircleCollider2D> ().enabled = false;
+		
+			float radius = 1.8f;
 
-			if (AITurn) {
-			
-				float radius = 1.8f;
+			p = Random.insideUnitCircle.normalized * radius;
 
-				p = Random.insideUnitCircle.normalized * radius;
+			Vector3 dir = p - startPos;
 
-				Vector3 dir = p - startPos;
-	
-				if (dir.sqrMagnitude > radius)
-					dir = dir.normalized * radius;
+			if (dir.sqrMagnitude > radius)
+				dir = dir.normalized * radius;
 
 
-				// Set the Position
+			// Set the Position
 
-				transform.position = startPos + dir;
+			transform.position = startPos + dir;
 
-				stateStress = true; 
+			stateStress = true; 
 
-				trail.enabled = false;
+			trail.enabled = false;
 
-				printed = false;
+			printed = false;
 
-				Invoke ("Release", 1f);
+			Invoke ("Release", 1f);
 
-			}
 		}
 	}
+}

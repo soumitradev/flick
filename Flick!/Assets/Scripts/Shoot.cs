@@ -133,9 +133,6 @@ public class Shoot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHan
             Instantiate(ball, startPos, Quaternion.identity);
 
             printed = true;
-            // spawn = false;
-
-            // GetComponent<Rigidbody2D>().isKinematic = true;
         }
 
         if (!stateStress && GetComponent<Speed>().speed < 0.01f)
