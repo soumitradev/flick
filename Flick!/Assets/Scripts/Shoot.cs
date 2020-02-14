@@ -63,12 +63,18 @@ public class Shoot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHan
         GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
     }
 
+        private void AllowPhysics1()
+    {
+        GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
+    }
+
     // Update is called once per frame
     public void OnEndDrag(PointerEventData pointerEvent)
     {
         //spawn = true;
 
         turnDone = true;
+        
 
         // GetComponent<Rigidbody2D>().isKinematic = false;
 
@@ -80,13 +86,18 @@ public class Shoot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHan
 
         // Add the Force
 
-        GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
+        Invoke("AllowPhysics1", .1f);
 
         Vector3 dir = startPos - transform.position;
 
         transform.position = startPos;
 
         GetComponent<Rigidbody2D>().AddForce(dir * force);
+        
+        Invoke("AllowPhysics", .1f);
+        
+        Invoke("AllowPhysics1", .1f);
+        // GetComponent<Rigidbody2D>().isKinematic = true;
 
         FindObjectOfType<AudioManager>().Play("Click");
 
@@ -118,7 +129,7 @@ public class Shoot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHan
         if (!stateStress)
             startPos = transform.position;
 
-        if (!stateStress && GetComponent<Speed>().speed == 0f && !printed)
+        if (!stateStress && GetComponent<Speed>().speed < 0.001f && !printed)
         {
             stateStress = false;
 
@@ -128,9 +139,17 @@ public class Shoot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHan
 
             // spawn = false;
 
-            GetComponent<Rigidbody2D>().isKinematic = true;
+            // GetComponent<Rigidbody2D>().isKinematic = true;
+        }
+
+        if (!stateStress && GetComponent<Speed>().speed < 0.001f)
+        {
+            // GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static; 
+            Invoke("AllowPhysics", .1f);
+            Invoke("AllowPhysics1", .1f);
         }
     }
+
 
     public void OnDrag(PointerEventData eventData)
     {
