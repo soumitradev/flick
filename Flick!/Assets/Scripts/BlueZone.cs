@@ -41,7 +41,8 @@ public class BlueZone : MonoBehaviour {
 			AILine = GameObject.FindGameObjectsWithTag ("AILine");
 
 			for (var i = 0; i < enemies.Length; i++) {
-				Destroy (enemies [i]);
+        		enemies[i].GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
+				// Destroy (enemies [i]);
 			}
 
 			for (var j = 0; j < AILine.Length; j++) {

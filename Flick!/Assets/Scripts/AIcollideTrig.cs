@@ -43,7 +43,7 @@ public class AIcollideTrig : MonoBehaviour {
 
 			for (var i = 0; i < players.Length; i++) {
         		players[i].GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
-				Destroy(players [i]);
+				// Destroy(players [i]);
 			}
 
 			for (var j = 0; j < AILine.Length; j++) {

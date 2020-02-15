@@ -41,7 +41,8 @@ public class RedZone : MonoBehaviour {
 			AILine = GameObject.FindGameObjectsWithTag ("AILine");
 
 			for (var i = 0; i < players.Length; i++) {
-				Destroy (players [i]);
+        		players[i].GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
+				// Destroy (players [i]);
 			}
 
 			for (var j = 0; j < AILine.Length; j++) {

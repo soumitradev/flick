@@ -265,6 +265,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   players: []
   Line: []
+  AILine: []
   cam: {fileID: 1375661710}
   text: {fileID: 1041146972}
   audioMixer: {fileID: 24100000, guid: 4240eef89cb9c5f4baa4cbe7b55ff958, type: 2}
@@ -704,7 +705,7 @@ TrailRenderer:
   m_Time: 0
   m_Parameters:
     serializedVersion: 3
-    widthMultiplier: 0.4
+    widthMultiplier: 0.5
     widthCurve:
       serializedVersion: 2
       m_Curve:
@@ -1254,6 +1255,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   players: []
   AILine: []
+  Line: []
   cam: {fileID: 1375661710}
   text: {fileID: 1325607655}
   audioMixer: {fileID: 24100000, guid: 4240eef89cb9c5f4baa4cbe7b55ff958, type: 2}
