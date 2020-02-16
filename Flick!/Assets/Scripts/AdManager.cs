@@ -3,12 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Advertisements;
 
-public class AdManager : MonoBehaviour {
-
+public class AdManager: MonoBehaviour {
 	public bool Testing = true;
 
-	void Start () {
-		Advertisement.Initialize ("1715289", Testing);
+	void Start(){
+		Advertisement.Initialize("1715289", Testing);
 	}
-
 }

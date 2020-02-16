@@ -2,38 +2,28 @@
 using UnityEngine;
 using UnityEngine.Audio;
 
-public class AudioManager : MonoBehaviour {
-
+public class AudioManager: MonoBehaviour {
 	public Sound[] sounds;
 	public AudioMixerGroup volume;
 
-	// Use this for initialization
-	void Awake () {
-		foreach (Sound s in sounds) {
-			s.source = gameObject.AddComponent<AudioSource> ();
-
+	void Awake(){
+		foreach(Sound s in sounds){
+			s.source = gameObject.AddComponent<AudioSource>();
 			s.source.clip = s.clip;
-
 			s.source.volume = s.volume;
-
 			s.source.loop = s.loop;
-
 			s.source.outputAudioMixerGroup = volume;
 		}
 	}
 
-	// Update is called once per frame
-	public void Play (string name) {
+	public void Play(string name){
+		Sound s = Array.Find(sounds, sound => sound.name == name);
 
-
-		Sound s = Array.Find (sounds, sound => sound.name == name);
-
-		if (s == null) {
-		
-			Debug.LogWarning ("Sound" + name + "not found!");
-			return;
-		
+		if (s == null){
+			Debug.LogWarning("Sound" + name + "not found!");
+			return;	
 		}
-		s.source.Play ();
+
+		s.source.Play();
 	}
 }

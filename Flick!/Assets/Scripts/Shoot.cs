@@ -9,7 +9,6 @@ using UnityEngine.EventSystems;
  * - Add Comments To Code
  * - Clean Up Code & Centralize
  * - Rename Variables / Code
- * - Beautify All Code
  * - Marketing
  * -----------------Next Version-----------
  * - Pause
@@ -31,10 +30,12 @@ public class Shoot: MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
 
     [HideInInspector]
     public bool stateStress = false;
+
     public bool turnDone = false;
 
     [HideInInspector]
     public bool printed = false;
+    
     public float force;
     public Vector3 startPos;
     public GameObject ball;
@@ -74,30 +75,22 @@ public class Shoot: MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
 
         stateStress = false;
 
-        // Add the Force
-
-
         Vector3 dir = startPos - transform.position;
-
         transform.position = startPos;
 
-
         GetComponent<TrailRenderer>().enabled = true;
-        GetComponent<Rigidbody2D>().AddForce(dir * force);
-    
+
+        GetComponent<Rigidbody2D>().AddForce(dir * force);    
 
         FindObjectOfType<AudioManager>().Play("Click");
 
         Chance++;
 
-        if (Chance >= 2)
-        {
+        if (Chance >= 2){
             original.tag = "otherLine";
-
             Line = GameObject.FindGameObjectsWithTag("Line");
 
-            for (var i = 0; i < Line.Length; i++)
-            {
+            for (var i = 0; i < Line.Length; i++){
                 Destroy(Line[i]);
             }
 
@@ -125,6 +118,7 @@ public class Shoot: MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
         if (GetComponent<Speed>().speed > 0 && !stateStress){
             Vector3 new_pos = transform.position;
             new_pos[2] = 1;
+
             Instantiate(ball, new_pos, Quaternion.identity);
         }
     }
@@ -134,23 +128,16 @@ public class Shoot: MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
 
 
     public void OnDrag(PointerEventData eventData){
-        // Keep it in a certain radius
         if (!turnDone){
             GetComponent<CircleCollider2D>().enabled = false;
 
-            // Convert mouse position to world position
-
             Vector3 p = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
             float radius = 1.8f;
-
             Vector3 dir = p - startPos;
-
             if (dir.sqrMagnitude > radius){
                 dir = dir.normalized * radius;
             }
-
-            // Set the Position
-
             transform.position = startPos + dir;
 
             stateStress = true;

@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ContinueMusic : MonoBehaviour {
-
-	void Awake()
-	{
+public class ContinueMusic: MonoBehaviour {
+	void Awake(){
 		GameObject[] objs = GameObject.FindGameObjectsWithTag("Music");
-		if (objs.Length > 1)
+
+		if (objs.Length > 1){
 			Destroy(this.gameObject);
+		}
 
 		DontDestroyOnLoad(this.gameObject);
 	}

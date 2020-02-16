@@ -1,14 +1,18 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.SceneManagement;
+using UnityEngine.Audio;
 
-public class Fading: MonoBehaviour {
+public class VideoFadingAudio: MonoBehaviour {
+
 	public Texture2D fadeOutTexture;
 	public float fadeSpeed = 0.8f;
+	public AudioMixer audioMixer;
 
 	private int drawDepth = -1000;
 	private float alpha = 1.0f;
 	private int fadeDir = -1;
+
 
 	void OnGUI(){
 		alpha += fadeDir * fadeSpeed * Time.deltaTime;
@@ -34,5 +38,7 @@ public class Fading: MonoBehaviour {
 
 	void OnLevelFinishedLoading(Scene scene, LoadSceneMode mode){
 		BeginFade(-1);
+
+		audioMixer.SetFloat("volume", 0f);
 	}
 }
