@@ -3,7 +3,7 @@
 
 public class Speed : MonoBehaviour
 {
-	public float speed = 0;
+	public float speed = 0f;
 
 
 	Vector3 lastPosition = Vector3.zero;

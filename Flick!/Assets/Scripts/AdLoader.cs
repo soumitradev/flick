@@ -80,13 +80,13 @@ public class AdLoader : MonoBehaviour {
 
 				PlayerPrefs.SetInt ("Coins", coinTemp);
 
-				CoinText.text = PlayerPrefs.GetInt ("Coins") + " Coins";
+				CoinText.text = PlayerPrefs.GetInt("Coins") + " Coins";
 			
 			} else {
 			
-				PlayerPrefs.SetInt ("Coins", 5);
+				PlayerPrefs.SetInt("Coins", 5);
 
-				CoinText.text = PlayerPrefs.GetInt ("Coins") + " Coins";
+				CoinText.text = PlayerPrefs.GetInt("Coins") + " Coins";
 
 				newCoin = false;
 			

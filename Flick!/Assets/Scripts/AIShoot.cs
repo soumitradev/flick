@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AIShoot : MonoBehaviour 
-{
+public class AIShoot: MonoBehaviour {
 	public bool AITurn = false;
 
 	public GameObject Opponent;
@@ -43,18 +42,15 @@ public class AIShoot : MonoBehaviour
 	
 	}
 
-	private void MakeStatic()
-    {
+	private void MakeStatic(){
         GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
     }
 
-    private void MakeDynamic()
-    {
+    private void MakeDynamic(){
         GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
     }
 
-    private void MakeKinematic()
-    {
+    private void MakeKinematic(){
         GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
     }
 
@@ -86,7 +82,7 @@ public class AIShoot : MonoBehaviour
 
 		Chance++;
 
-		if (Chance >= 2) {
+		if (Chance >= 2){
 
 			original.tag = "AIotherLine";
 
@@ -105,19 +101,14 @@ public class AIShoot : MonoBehaviour
 
 	void FixedUpdate(){
 		
-		AITurn = Opponent.GetComponent<Shoot> ().turnDone;
+		AITurn = Opponent.GetComponent<Shoot>().turnDone;
 	
-		if (AITurn) {
-			
+		if (AITurn && Opponent.GetComponent<Speed>().speed < 0.01f){			
 			Turn ();
-
-
 			Opponent.GetComponent<Shoot> ().turnDone = false;
-
-
 		}
 
-		if (!stateStress && GetComponent<Speed>().speed < 0.01f && !printed) {
+		if (!stateStress && GetComponent<Speed>().speed < 0.01f && !printed){
 
 			startPos = transform.position;
 
@@ -130,8 +121,7 @@ public class AIShoot : MonoBehaviour
 			spawn = false;
 		}
 
-		if (!stateStress && GetComponent<Speed>().speed < 0.01f)
-        {
+		if (!stateStress && GetComponent<Speed>().speed < 0.01f){
             MakeStatic();
             MakeDynamic();
         }

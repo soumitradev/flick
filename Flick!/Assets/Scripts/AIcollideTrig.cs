@@ -15,6 +15,7 @@ public class AIcollideTrig : MonoBehaviour {
 	public float volumeFX;
 	public AudioMixer SFX;
 	public GameObject manager;
+	public GameObject enemy;
 
 	void OnTriggerEnter2D (Collider2D player){
 		
@@ -23,36 +24,40 @@ public class AIcollideTrig : MonoBehaviour {
 
 			audioMixer.SetFloat("volume", -80f);
 
-			FindObjectOfType<AudioManager>() .Play ("Win");
+			FindObjectOfType<AudioManager>().Play("Win");
 
-			text.SetActive (true);
+			text.SetActive(true);
+			
+			enemy.GetComponentInParent<AIShoot>().enabled = false;
+			player.attachedRigidbody.bodyType = RigidbodyType2D.Static;
 
-			player.GetComponentInParent<Shoot> ().enabled = false;
+			player.GetComponentInParent<Shoot>().enabled = false;
 
-			cam.GetComponent<MultipleTargetCam> ().targets.RemoveAt(0);
+			cam.GetComponent<MultipleTargetCam>().targets.RemoveAt(0);
 
 
-			manager.GetComponent<LoadTimer> ().timerActive = true;
+			manager.GetComponent<LoadTimer>().timerActive = true;
 
 			
+			// Time.timeScale = 0f;
 
 
-			players = GameObject.FindGameObjectsWithTag ("Enemy");
-			AILine = GameObject.FindGameObjectsWithTag ("AILine");
-			Line = GameObject.FindGameObjectsWithTag("Line");
+			// players = GameObject.FindGameObjectsWithTag ("Enemy");
+			// AILine = GameObject.FindGameObjectsWithTag ("AILine");
+			// Line = GameObject.FindGameObjectsWithTag("Line");
 
-			for (var i = 0; i < players.Length; i++) {
-        		players[i].GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
-				// Destroy(players [i]);
-			}
+			// for (var i = 0; i < players.Length; i++) {
+        	// 	players[i].GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
+			// 	// Destroy(players [i]);
+			// }
 
-			for (var j = 0; j < AILine.Length; j++) {
-				Destroy(AILine [j]);
-			}
+			// for (var j = 0; j < AILine.Length; j++) {
+			// 	Destroy(AILine [j]);
+			// }
 
-			for (var k = 0; k < Line.Length; k++) {
-				Destroy(Line [k]);
-			}
+			// for (var k = 0; k < Line.Length; k++) {
+			// 	Destroy(Line [k]);
+			// }
 
 		}
 	}

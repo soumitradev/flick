@@ -21,10 +21,11 @@ public class BlueZone : MonoBehaviour {
 		
 			audioMixer.SetFloat("volume", -80f);
 
-			FindObjectOfType<AudioManager>() .Play ("Win");
+			FindObjectOfType<AudioManager>().Play ("Win");
 
 			text.SetActive (true);
 
+			enemy.GetComponentInParent<AIShoot>().enabled = false;
 			//enemy.GetComponentInParent<Shoot> ().enabled = false;
 
 			enemy.attachedRigidbody.bodyType = RigidbodyType2D.Static;
@@ -35,19 +36,20 @@ public class BlueZone : MonoBehaviour {
 			manager.GetComponent<LoadTimer> ().timerActive = true;
 
 
+			// Time.timeScale = 0f;
 
 
-			enemies = GameObject.FindGameObjectsWithTag ("Enemy");
-			AILine = GameObject.FindGameObjectsWithTag ("AILine");
+			// enemies = GameObject.FindGameObjectsWithTag ("Enemy");
+			// AILine = GameObject.FindGameObjectsWithTag ("AILine");
 
-			for (var i = 0; i < enemies.Length; i++) {
-        		enemies[i].GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
-				// Destroy (enemies [i]);
-			}
+			// for (var i = 0; i < enemies.Length; i++) {
+        	// 	enemies[i].GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
+			// 	// Destroy (enemies [i]);
+			// }
 
-			for (var j = 0; j < AILine.Length; j++) {
-				Destroy (AILine [j]);
-			}
+			// for (var j = 0; j < AILine.Length; j++) {
+			// 	Destroy (AILine [j]);
+			// }
 		
 		}
 	}

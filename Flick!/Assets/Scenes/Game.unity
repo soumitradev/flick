@@ -753,7 +753,7 @@ TrailRenderer:
     numCornerVertices: 90
     numCapVertices: 90
     alignment: 0
-    textureMode: 0
+    textureMode: 3
     shadowBias: 0
     generateLightingData: 0
   m_MinVertexDistance: 0.1
@@ -1262,6 +1262,7 @@ MonoBehaviour:
   volumeFX: 0
   SFX: {fileID: 0}
   manager: {fileID: 1427965588}
+  enemy: {fileID: 1449729133}
 --- !u!1001 &792013501
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1664,6 +1665,7 @@ MonoBehaviour:
   text: {fileID: 1041146972}
   audioMixer: {fileID: 24100000, guid: 4240eef89cb9c5f4baa4cbe7b55ff958, type: 2}
   manager: {fileID: 1427965588}
+  enemy: {fileID: 1449729133}
 --- !u!61 &1327025862
 BoxCollider2D:
   m_ObjectHideFlags: 0
