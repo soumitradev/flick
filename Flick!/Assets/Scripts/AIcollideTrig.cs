@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Audio;
 
-public class AIcollideTrig: MonoBehaviour {
+public class AICollideTrig: MonoBehaviour {
 	public GameObject[] players;
 	public GameObject[] AILine;
 	public GameObject[] Line;
