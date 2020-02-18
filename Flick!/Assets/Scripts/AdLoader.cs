@@ -29,7 +29,6 @@ public class AdLoader: MonoBehaviour {
 		Advertisement.Initialize("1715289", Testing);
 	}
 
-	// Update is called once per frame
 	public void Play_Ad(){
 		if (Advertisement.IsReady()){
 			Advertisement.Show();
