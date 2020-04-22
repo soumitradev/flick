@@ -5,14 +5,14 @@ using UnityEngine.SceneManagement;
 using UnityEngine.Audio;
 
 public class AICollideTrig: MonoBehaviour {
-	public GameObject[] players;
-	public GameObject[] AILine;
-	public GameObject[] Line;
+	// public GameObject[] players;
+	// public GameObject[] AILine;
+	// public GameObject[] Line;
 	public GameObject cam;
 	public GameObject text;
 	public AudioMixer audioMixer;
-	public float volumeFX;
-	public AudioMixer SFX;
+	// public float volumeFX;
+	// public AudioMixer SFX;
 	public GameObject manager;
 	public GameObject enemy;
 
@@ -28,7 +28,9 @@ public class AICollideTrig: MonoBehaviour {
 
 			player.GetComponentInParent<Shoot>().enabled = false;
 
-			cam.GetComponent<MultipleTargetCam>().targets.RemoveAt(0);
+			if (cam.GetComponent<MultipleTargetCam>().targets.Count > 0){
+				cam.GetComponent<MultipleTargetCam>().targets.RemoveAt(0);
+			}
 
 			manager.GetComponent<LoadTimer>().timerActive = true;
 			

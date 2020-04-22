@@ -7,10 +7,10 @@ using UnityEngine.Audio;
 
 public class RedZone: MonoBehaviour {
 	// List of players (the user)
-	public GameObject[] players;
+	// public GameObject[] players;
 
 	// List of line collider objects for AI
-	public GameObject[] AILine;
+	// public GameObject[] AILine;
 
 	// Camera
 	public GameObject cam;
@@ -45,7 +45,9 @@ public class RedZone: MonoBehaviour {
 			player.attachedRigidbody.bodyType = RigidbodyType2D.Static;
 
 			// Remove player from target of camera
-			cam.GetComponent<MultipleTargetCam>().targets.RemoveAt(0);
+			if (cam.GetComponent<MultipleTargetCam>().targets.Count > 0){
+				cam.GetComponent<MultipleTargetCam>().targets.RemoveAt(0);
+			}
 
 			// Turn on timer and show menu
 			timeManager.GetComponent<LoadTimer>().timerActive = true;

@@ -5,12 +5,11 @@ using UnityEngine.SceneManagement;
 using UnityEngine.Audio;
 
 public class BlueZone: MonoBehaviour {
-	public GameObject[] enemies;
-	public GameObject[] AILine;
-
+	// public GameObject[] enemies;
+	// public GameObject[] AILine;
 	public GameObject cam;
 	public GameObject text;
-	public AudioMixer audioMixer;
+	// public AudioMixer audioMixer;
 	public GameObject manager;
 
 	void OnTriggerEnter2D(Collider2D enemy){
@@ -22,8 +21,10 @@ public class BlueZone: MonoBehaviour {
 
 			enemy.GetComponentInParent<AIShoot>().enabled = false;
 			enemy.attachedRigidbody.bodyType = RigidbodyType2D.Static;
-
-			cam.GetComponent<MultipleTargetCam>().targets.RemoveAt(0);
+			
+			if (cam.GetComponent<MultipleTargetCam>().targets.Count > 0){
+				cam.GetComponent<MultipleTargetCam>().targets.RemoveAt(0);
+			}
 			
 			manager.GetComponent<LoadTimer>().timerActive = true;
 

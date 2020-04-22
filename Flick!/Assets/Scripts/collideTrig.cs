@@ -5,9 +5,9 @@ using UnityEngine.SceneManagement;
 using UnityEngine.Audio;
 
 public class CollideTrig: MonoBehaviour {
-	public GameObject[] players;
-	public GameObject[] Line;
-	public GameObject[] AILine;
+	// public GameObject[] players;
+	// public GameObject[] Line;
+	// public GameObject[] AILine;
 	public GameObject cam;
 	public GameObject text;
 	public AudioMixer audioMixer;
@@ -23,7 +23,9 @@ public class CollideTrig: MonoBehaviour {
 			enemy.GetComponentInParent<AIShoot>().enabled = false;			
 			enemy.attachedRigidbody.bodyType = RigidbodyType2D.Static;
 
-			cam.GetComponent<MultipleTargetCam>().targets.RemoveAt(1);
+			if (cam.GetComponent<MultipleTargetCam>().targets.Count > 1){
+				cam.GetComponent<MultipleTargetCam>().targets.RemoveAt(1);
+			}
 
 			manager.GetComponent<LoadTimer>().timerActive = true;
 	

@@ -5,21 +5,38 @@ using UnityEngine.Advertisements;
 using UnityEngine.UI;
 
 public class AdLoader: MonoBehaviour {
+	// If app is still in development, ad is not loaded - only a placeholder is.
 	public bool Testing = true;
+
+	// Text to show while loading ad
 	public GameObject WaitText;
+
+	// Gradient to pull over everything else when loading ad
 	public GameObject Darken;
+
+	// Text to show when loading ad fails
 	public GameObject FailText;
+
+	// Boolean for if timer to load ad is on
 	public bool timerActive = false;
+	// Timer
 	public float time;
+	// Amount of time to wait for when loading ad
 	public float wait = 2f;
+	// Boolean for if time is up
 	public bool done = false;
+	// Boolean if user has earned new coins
 	public bool newCoin;
+	// Temporary storage in memory for number of coins
 	public int coinTemp;
+	// Text that shows number of coins the user has
 	public Text CoinText;
 
 	void Start(){
+		// Set the text for 
 		CoinText.text = PlayerPrefs.GetInt("Coins") + " Coins";
 
+	
 		if (PlayerPrefs.GetInt("Coins") == 0){
 			PlayerPrefs.SetInt("Coins", 0);		
 			CoinText.text = PlayerPrefs.GetInt("Coins") + " Coins";

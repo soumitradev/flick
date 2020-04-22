@@ -1664,7 +1664,7 @@ MonoBehaviour:
   cam: {fileID: 1375661710}
   text: {fileID: 1041146972}
   audioMixer: {fileID: 24100000, guid: 4240eef89cb9c5f4baa4cbe7b55ff958, type: 2}
-  manager: {fileID: 1427965588}
+  timeManager: {fileID: 0}
   enemy: {fileID: 1449729133}
 --- !u!61 &1327025862
 BoxCollider2D:
@@ -1990,7 +1990,7 @@ MonoBehaviour:
   - {fileID: 544191944}
   offset: {x: 0, y: 0, z: -15}
   smoothTime: 0.5
-  minZoom: 30
+  minZoom: 10
   maxZoom: 5
   zoomLim: 50
 --- !u!114 &1375661717

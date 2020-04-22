@@ -18,13 +18,13 @@ public class MultipleTargetCam: MonoBehaviour {
 	public float smoothTime = .5f;
 
 	// Minimum zoon for camera
-	public float minZoom = 100f;
+	public float minZoom;
 
 	// Maximum zoom for camera
-	public float maxZoom = 1f;
+	public float maxZoom;
 
 	// Limit for zooming
-	public float zoomLim = Mathf.Infinity;
+	public float zoomLim;
 
 	// Camera object
 	private Camera cam;
@@ -47,7 +47,7 @@ public class MultipleTargetCam: MonoBehaviour {
 
 	void Zoom(){
 		// Interpolate smoothly between maxZoom, minZoom
-		float newZoom = Mathf.Lerp(maxZoom, minZoom, GetMaxDist() / zoomLim);
+		float newZoom = Mathf.Lerp(maxZoom, minZoom, GetBounds().size.x / zoomLim);
 
 		// Set zoom
 		cam.orthographicSize = newZoom;	
@@ -61,9 +61,18 @@ public class MultipleTargetCam: MonoBehaviour {
 		// Move the transform smoothly to the new position
 		transform.position = Vector3.SmoothDamp(transform.position, NewPos, ref velocity, smoothTime);	
 	}
+	
+	Vector3 GetCenter(){
+		// If only 1 object, return its position directly
+		if (targets.Count == 1) {			
+			return targets[0].position;		
+		}
 
-	float GetMaxDist(){
-		// Create a bounds object
+		// Return center of bounds
+		return GetBounds().center;
+	}
+
+	Bounds GetBounds(){
 		var bounds = new Bounds(targets[0].position, Vector3.zero);
 
 		// Add all targets to bounds
@@ -71,25 +80,6 @@ public class MultipleTargetCam: MonoBehaviour {
 			bounds.Encapsulate(targets[i].position);
 		}
 
-		// Return size for bounds
-		return (bounds.size.x * bounds.size.y / 10f) + 5f;
-	}
-
-	Vector3 GetCenter(){
-		// If only 1 object, return its position directly
-		if (targets.Count == 1) {			
-			return targets[0].position;		
-		}
-
-		// Create a bounds object
-		var bounds = new Bounds(targets[0].position, Vector3.zero);
-
-		// Add targets to bounds
-		for (int i = 0; i < targets.Count; i++){		
-			bounds.Encapsulate(targets[i].position);		
-		}
-
-		// Return center of bounds
-		return bounds.center;
+		return bounds;
 	}
 }
