@@ -263,9 +263,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f576d5d452ef914c93a21b61e77a002, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  players: []
-  Line: []
-  AILine: []
   cam: {fileID: 1375661710}
   text: {fileID: 1041146972}
   audioMixer: {fileID: 24100000, guid: 4240eef89cb9c5f4baa4cbe7b55ff958, type: 2}
@@ -1253,14 +1250,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7142cfe60f7ee364faf2fd42637c683a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  players: []
-  AILine: []
-  Line: []
   cam: {fileID: 1375661710}
   text: {fileID: 1325607655}
   audioMixer: {fileID: 24100000, guid: 4240eef89cb9c5f4baa4cbe7b55ff958, type: 2}
-  volumeFX: 0
-  SFX: {fileID: 0}
   manager: {fileID: 1427965588}
   enemy: {fileID: 1449729133}
 --- !u!1001 &792013501
@@ -1511,11 +1503,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e9a4a8f55a534d4a8f06014a2763e4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemies: []
-  AILine: []
   cam: {fileID: 1375661710}
   text: {fileID: 1325607655}
-  audioMixer: {fileID: 24100000, guid: 4240eef89cb9c5f4baa4cbe7b55ff958, type: 2}
   manager: {fileID: 1427965588}
 --- !u!1 &1286086761
 GameObject:
@@ -1659,8 +1648,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e887c1d28fbc04e49ab8eaa285a4af80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  players: []
-  AILine: []
   cam: {fileID: 1375661710}
   text: {fileID: 1041146972}
   audioMixer: {fileID: 24100000, guid: 4240eef89cb9c5f4baa4cbe7b55ff958, type: 2}
@@ -1990,9 +1977,9 @@ MonoBehaviour:
   - {fileID: 544191944}
   offset: {x: 0, y: 0, z: -15}
   smoothTime: 0.5
-  minZoom: 10
-  maxZoom: 5
-  zoomLim: 50
+  minZoom: 30
+  maxZoom: 3.5
+  zoomLim: 100
 --- !u!114 &1375661717
 MonoBehaviour:
   m_ObjectHideFlags: 0
