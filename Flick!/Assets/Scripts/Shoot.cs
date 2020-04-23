@@ -3,8 +3,6 @@ using UnityEngine.EventSystems;
 
 /*  TODO:
  * ------------Post-Up------------
- * - Add Comments To Code
- * - Clean Up Code & Centralize
  * - Rename Variables
  * - Marketing
  * - Privacy Policy update
@@ -17,6 +15,7 @@ using UnityEngine.EventSystems;
  * - Difficulty levels
  * *************************V1.1.0********************************
  * - Add Skins
+ * - Clean Up Code & Centralize
  * - Add Local Multiplayer
  * - Replace TrailRenderer?
  */

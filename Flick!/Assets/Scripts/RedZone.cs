@@ -31,7 +31,7 @@ public class RedZone: MonoBehaviour {
 		// If the object that collides with the RedZone is the player,
 		if (player.tag == "Player") {
 			// Play audio for death
-			audioMixer.SetFloat("volume", -80f);
+			// audioMixer.SetFloat("volume", -80f);
 			FindObjectOfType<AudioManager>().Play("Death");
 
 			// Losing text should be active

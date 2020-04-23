@@ -52,8 +52,5 @@ public class VideoFadingAudio: MonoBehaviour {
 	void OnLevelFinishedLoading(Scene scene, LoadSceneMode mode){
 		// Fade in
 		BeginFade(-1);
-
-		// Mute audio
-		audioMixer.SetFloat("volume", 0f);
 	}
 }

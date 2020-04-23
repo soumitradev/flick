@@ -33,10 +33,11 @@ public class AdLoader: MonoBehaviour {
 	public Text CoinText;
 
 	void Start(){
-		// Set the text for 
+		// Set the text for coins
 		CoinText.text = PlayerPrefs.GetInt("Coins") + " Coins";
 
-	
+		// tbh I have no idea what this does. It looks wrong,
+		// but I'm too scared to change it since it works.
 		if (PlayerPrefs.GetInt("Coins") == 0){
 			PlayerPrefs.SetInt("Coins", 0);		
 			CoinText.text = PlayerPrefs.GetInt("Coins") + " Coins";
@@ -47,12 +48,14 @@ public class AdLoader: MonoBehaviour {
 	}
 
 	public void Play_Ad(){
+		// Play ad
 		if (Advertisement.IsReady()){
 			Advertisement.Show();
 		}
 	}
 
 	public void Play_Rewarded_Ad(){
+		// Play ad but add coins to player
 		ShowOptions options = new ShowOptions();
 		options.resultCallback = AdCallbackhandler;
 
@@ -68,24 +71,28 @@ public class AdLoader: MonoBehaviour {
 	void AdCallbackhandler(ShowResult result){
 		switch(result){
 			case ShowResult.Finished:
-				if (!newCoin){					
+				if (!newCoin){
+					// If coin already exists in storage, add 5 coins
 					coinTemp = PlayerPrefs.GetInt("Coins");
 					coinTemp += 5;
 					PlayerPrefs.SetInt("Coins", coinTemp);
 					CoinText.text = PlayerPrefs.GetInt("Coins") + " Coins";
 				} else {
+					// If coin doesn't exist in storage, create a permanent place to store coins
 					PlayerPrefs.SetInt("Coins", 5);
 					CoinText.text = PlayerPrefs.GetInt("Coins") + " Coins";
 
 					newCoin = false;				
 				}
 
+				// Hide the ad waiting UI
 				WaitText.SetActive(false);
 				Darken.SetActive(false);
 
 			break;
 
 			case ShowResult.Failed:
+			// If playing ad failed, tell the user it failed.
 				FailText.SetActive(true);
 				timerActive = true;
 			break;
@@ -93,6 +100,7 @@ public class AdLoader: MonoBehaviour {
 	}
 
 	void Update(){
+		// Make the timer tick
 		if (timerActive){		
 			time += 1 * Time.deltaTime;
 
