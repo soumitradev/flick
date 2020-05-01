@@ -3,11 +3,9 @@ using UnityEngine.EventSystems;
 
 /*  TODO:
  * - Testing
- * - Setup Build Settings
- * - Write an actual Privacy Policy
- * - Read Play Store Guidelines
  * ------------Post-Up------------
  * - Game Size Optimisation
+ * - Back Button functionality
  * - Redo some graphics
  * - Rename Variables
  * - Marketing
@@ -55,6 +53,8 @@ public class Shoot: MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
     // Array that stores all the latest collide detecting balls
     public GameObject[] Line;
 
+    private bool tempBool = false;
+
     private void Start(){
         // Set startPos to initial position
         startPos = transform.position;
@@ -87,8 +87,6 @@ public class Shoot: MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
         Invoke("MakeKinematic", 0.1f);
         Invoke("MakeDynamic", 0.1f);
 
-        // After ending the drag, our turn is done
-        turnDone = true;
         
         // Enable collider after making move
         GetComponent<CircleCollider2D>().enabled = true;
@@ -98,6 +96,8 @@ public class Shoot: MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
 
         // After ending the turn, physics needs to be fixed in Update() or FixedUpdate() after the player stops
         physicsFixed = false;
+
+        tempBool = false;
 
         // Get vector along which it's supposed to move, and then move the ball to where it was before dragging
         Vector3 dir = startPos - transform.position;
@@ -134,6 +134,13 @@ public class Shoot: MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHand
     }
 
     private void FixedUpdate(){
+        
+        // Finish turn ONLY if player is actually moving
+        if (GetComponent<Speed>().speed > 0.1f && !stateStress && !tempBool){
+            turnDone = true;
+            tempBool = true;
+        }
+
         // If the player has stopped after being released, fix physics
         if (!stateStress && GetComponent<Speed>().speed < 0.01f && !physicsFixed){
             // Stop the player

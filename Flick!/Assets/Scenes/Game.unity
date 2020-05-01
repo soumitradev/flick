@@ -605,7 +605,7 @@ PrefabInstance:
     - target: {fileID: 114121530176264946, guid: a8b3d784739adcf4781f2e61fb5c6ea3,
         type: 3}
       propertyPath: sounds.Array.data[0].loop
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a8b3d784739adcf4781f2e61fb5c6ea3, type: 3}
@@ -1945,8 +1945,8 @@ Camera:
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
   m_TargetEye: 3
-  m_HDR: 1
-  m_AllowMSAA: 1
+  m_HDR: 0
+  m_AllowMSAA: 0
   m_AllowDynamicResolution: 0
   m_ForceIntoRT: 0
   m_OcclusionCulling: 1
@@ -1984,8 +1984,8 @@ MonoBehaviour:
   offset: {x: 0, y: 0, z: -15}
   smoothTime: 0.5
   minZoom: 30
-  maxZoom: 3.5
-  zoomLim: 100
+  maxZoom: 5
+  zoomLim: 70
 --- !u!114 &1375661717
 MonoBehaviour:
   m_ObjectHideFlags: 0

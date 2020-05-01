@@ -108,7 +108,7 @@ public class AIShoot: MonoBehaviour {
 		AITurn = Opponent.GetComponent<Shoot>().turnDone;
 
 		// If the opponent has slowed down, and it is AI's turn, make a turn.
-		if (AITurn && Opponent.GetComponent<Speed>().speed < 0.01f){			
+		if (AITurn && Opponent.GetComponent<Speed>().speed < 0.01f && Opponent.GetComponent<Shoot>().chanceNumber > 0){			
 			Turn();
 			// Let user play after AI's turn
 			Opponent.GetComponent<Shoot>().turnDone = false;
@@ -158,7 +158,7 @@ public class AIShoot: MonoBehaviour {
 			}
 
 			// Keep the player in the limited radius
-			transform.position = startPos + dir;
+			transform.position = startPos + p;
 
 			// Set booleans
 			stateStress = true;
