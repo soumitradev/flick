@@ -2,11 +2,18 @@
 using UnityEngine.EventSystems;
 
 /*  TODO:
+ * - Testing
+ * - Setup Build Settings
+ * - Write an actual Privacy Policy
+ * - Read Play Store Guidelines
  * ------------Post-Up------------
+ * - Game Size Optimisation
+ * - Redo some graphics
  * - Rename Variables
  * - Marketing
  * - Privacy Policy update
  * -----------------Next Version-----------
+ * - Redo UI
  * - Pause
  * - Dark Mode
  * - Redo Soundtrack
@@ -18,6 +25,7 @@ using UnityEngine.EventSystems;
  * - Clean Up Code & Centralize
  * - Add Local Multiplayer
  * - Replace TrailRenderer?
+ * - Google Play Games Integration
  */
 
 public class Shoot: MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler {
